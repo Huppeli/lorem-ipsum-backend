@@ -1,4 +1,4 @@
-from boto3.dynamodb.conditions import Key, Attr
+from boto3.dynamodb.conditions import Key
 
 
 def query_with_limit_from(table, hash_key, key_value, limit=1):
@@ -35,3 +35,4 @@ def pop_row_from(table, hash_key, hash_key_value, range_key):
         return row
     except IndexError:
         raise IndexError
+
