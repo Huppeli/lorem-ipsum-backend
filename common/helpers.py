@@ -9,7 +9,7 @@ class DecimalEncoder(json.JSONEncoder):
         return super(DecimalEncoder, self).default(obj)
 
 
-def gen_response(body, statuscode=200, dynamodb_results=None):
+def gen_response(body=None, statuscode=200, dynamodb_results=None):
     if dynamodb_results:
         body = json.dumps(dynamodb_results['Items'], cls=DecimalEncoder)
     else:

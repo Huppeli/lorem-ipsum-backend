@@ -8,7 +8,7 @@ from common import helpers
 DYNAMODB = boto3.resource('dynamodb')
 
 PROFILE_DIMENSIONS = ['meat', 'veggies', 'fruits', 'dairy', 'fish']
-
+PROFILE_METRICS = ['kg', 'euros']
 
 def create_user(table: DYNAMODB.Table, custom_id=None):
     # meat veggies fruits dairy, fish kg euros
@@ -19,7 +19,10 @@ def create_user(table: DYNAMODB.Table, custom_id=None):
         unique_id = str(uuid.uuid4())
     item_content = {'uuid': unique_id}
     for dimension in PROFILE_DIMENSIONS:
-        item_content[dimension] = {'kg': decimal.Decimal(0.0), 'euros': decimal.Decimal(0.0)}
+        metrics = {}
+        for metric in PROFILE_METRICS:
+            metrics[metric] = decimal.Decimal(0.0)
+        item_content[dimension] = metrics
     response = table.put_item(
         Item=item_content
     )

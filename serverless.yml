@@ -59,6 +59,12 @@ functions:
     - http:
         path: user/create
         method: post
+  user_get:
+    handler: endpoints.user.get.handler
+    events:
+    - http:
+        path: user/get
+        method: post
   hello:
     handler: handler.hello
 
