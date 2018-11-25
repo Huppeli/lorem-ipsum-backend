@@ -43,6 +43,7 @@ provider:
 
 
 
+
 # you can add packaging information here
 #package:
 #  include:
@@ -72,6 +73,14 @@ functions:
     events:
     - http:
         path: user/data/update
+        method: post
+        cors: true
+  rds:
+    timeout: 30
+    handler: endpoints.rds.connect.handler
+    events:
+    - http:
+        path: rds/connect
         method: post
         cors: true
 
